@@ -3,18 +3,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Country } from "./models/Country";
 import { CountryBox } from "./components/CountryBox";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
-  const germany: Country = {
-    name: "Germany",
-    flagURL: "https://flagcdn.com/w320/de.png",
-    population: 81770900,
-    region: "Europe",
-    capital: "Berlin",
-  };
+  const [countries, setCountries] = useState<Country[]>([]);
 
-  const countryBoxes = Array.from({ length: 10 }, (_, i) => (
-    <CountryBox countryInfo={germany} key={i} />
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const res = await axios.get(
+          "https://restcountries.com/v3.1/all?fields=name,capital,population,flags,region"
+        );
+        setCountries(res.data);
+      } catch (err) {
+        if (err instanceof Error) console.log(err.message);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
+  const countryBoxes = countries.map((e, i) => (
+    <CountryBox countryInfo={e} key={i} />
   ));
 
   return (
