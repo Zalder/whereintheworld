@@ -1,15 +1,125 @@
+$totalWidth: 1440px;
+$pagePadding: 5rem;
+
 .container {
-  padding: 0 5rem;
-  margin: 0 auto;
   width: 100%;
   height: 100%;
-  max-width: 1440px;
 
-  .topBar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  .header {
+    background-color: hsl(209, 23%, 22%);
+
+    .topBar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 $pagePadding;
+      max-width: $totalWidth;
+      margin: 0 auto;
+
+      .darkModeIcon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .mainSection {
+    padding: 2.5rem $pagePadding;
+    max-width: $totalWidth;
+    margin: 0 auto;
+
+    .searchBar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .searchWrapper {
+        width: 30rem;
+        height: 3.5rem;
+        background-color: hsl(209, 23%, 22%);
+        border-radius: 6px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 2rem;
+        gap: 1rem;
+
+        input {
+          font-family: "Nunito Sans", sans-serif;
+          color: hsl(0, 0%, 100%);
+          font-weight: 600;
+          height: 100%;
+          border: none;
+          background-color: transparent;
+          flex-grow: 1;
+
+          &:focus {
+            outline: none;
+          }
+          &::placeholder {
+            color: hsl(0, 0%, 100%);
+          }
+        }
+      }
+
+      select {
+        width: 12.5rem;
+        height: 3.5rem;
+        background-color: hsl(209, 23%, 22%);
+        border-radius: 6px;
+        border: none;
+        padding: 0 1rem;
+        appearance: none;
+
+        font-family: "Nunito Sans", sans-serif;
+        color: hsl(0, 0%, 100%);
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .countriesList {
+    display: grid;
+    grid-gap: 4.5rem;
+    margin-top: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
+
+    .countryBox {
+      width: 16.5rem;
+      border-radius: 4px;
+      overflow: hidden;
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .countryInfo {
+        font-family: "Nunito Sans", sans-serif;
+        color: hsl(0, 0%, 100%);
+        font-weight: 400;
+        padding: 1.25rem;
+        padding-bottom: 2.5rem;
+
+        h2 {
+          margin: 0;
+          font-size: 18px;
+          margin-bottom: 1rem;
+        }
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          font-size: 14px;
+        }
+        background-color: hsl(209, 23%, 22%);
+        width: 100%;
+      }
+    }
   }
 }
 
@@ -17,6 +127,7 @@ h1 {
   font-family: "Nunito Sans", sans-serif;
   font-size: 22px;
   color: hsl(0, 0%, 100%);
+  appearance: none;
 }
 
 a {
