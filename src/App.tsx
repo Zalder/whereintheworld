@@ -1,8 +1,22 @@
 import classes from "./App.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Country } from "./models/Country";
+import { CountryBox } from "./components/CountryBox";
 
 function App() {
+  const germany: Country = {
+    name: "Germany",
+    flagURL: "https://flagcdn.com/w320/de.png",
+    population: 81770900,
+    region: "Europe",
+    capital: "Berlin",
+  };
+
+  const countryBoxes = Array.from({ length: 10 }, (_, i) => (
+    <CountryBox countryInfo={germany} key={i} />
+  ));
+
   return (
     <>
       <div className={classes.container}>
@@ -36,246 +50,7 @@ function App() {
               <option value="oceania">Oceania</option>
             </select>
           </div>
-          <div className={classes.countriesList}>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className={classes.countryBox}>
-              <img src="https://flagcdn.com/w320/de.png" alt="" />
-              <div className={classes.countryInfo}>
-                <h2>Germany</h2>
-                <ul>
-                  <li>
-                    <b>Population</b>: 81,770,900
-                  </li>
-                  <li>
-                    <b>Region</b>: Europe
-                  </li>
-                  <li>
-                    <b>Capital</b>: Berlin
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <div className={classes.countriesList}>{countryBoxes}</div>
         </div>
       </div>
     </>

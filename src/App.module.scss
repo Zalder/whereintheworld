@@ -87,39 +87,6 @@ $pagePadding: 5rem;
     grid-gap: 4.5rem;
     margin-top: 3rem;
     grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
-
-    .countryBox {
-      width: 16.5rem;
-      border-radius: 4px;
-      overflow: hidden;
-
-      img {
-        max-width: 100%;
-        display: block;
-      }
-
-      .countryInfo {
-        font-family: "Nunito Sans", sans-serif;
-        color: hsl(0, 0%, 100%);
-        font-weight: 400;
-        padding: 1.25rem;
-        padding-bottom: 2.5rem;
-
-        h2 {
-          margin: 0;
-          font-size: 18px;
-          margin-bottom: 1rem;
-        }
-        ul {
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
-          font-size: 14px;
-        }
-        background-color: hsl(209, 23%, 22%);
-        width: 100%;
-      }
-    }
   }
 }
 
