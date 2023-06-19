@@ -11,6 +11,7 @@ export interface DropdownOption {
 
 type Props = {
   options: DropdownOption[];
+  onSelect?: (option: DropdownOption) => void;
 };
 
 export const FilterDropdown = (props: Props) => {
@@ -20,6 +21,9 @@ export const FilterDropdown = (props: Props) => {
   const selectOption = (option: DropdownOption) => {
     setSelectedItem(option);
     setIsOpen(false);
+    if (props.onSelect) {
+      props.onSelect(option);
+    }
   };
 
   const options = props.options.map((elem, idx) => (

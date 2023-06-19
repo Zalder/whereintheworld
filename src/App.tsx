@@ -9,14 +9,31 @@ import { DropdownOption, FilterDropdown } from "./components/FilterDropdown";
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
+  const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
 
   const regions: DropdownOption[] = [
-    { id: "africa", label: "Africa" },
-    { id: "america", label: "America" },
-    { id: "asia", label: "Asia" },
-    { id: "europe", label: "Europe" },
-    { id: "oceania", label: "Oceania" },
+    { id: "Africa", label: "Africa" },
+    { id: "Americas", label: "America" },
+    { id: "Asia", label: "Asia" },
+    { id: "Europe", label: "Europe" },
+    { id: "Oceania", label: "Oceania" },
   ];
+
+  const onRegionSelected = (option: DropdownOption) => {
+    const newCountries = countries
+      .filter((elem) => elem.region == option.id)
+      .sort((a, b) => a.name.common.localeCompare(b.name.common));
+    setFilteredCountries(newCountries);
+  };
+
+  const filterCountries = (region?: string) => {
+    if (region) {
+      const newCountries = countries.filter((elem) => elem.region == region);
+      setFilteredCountries(newCountries);
+    } else {
+      setFilteredCountries(countries);
+    }
+  };
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -24,7 +41,11 @@ function App() {
         const res = await axios.get(
           "https://restcountries.com/v3.1/all?fields=name,capital,population,flags,region"
         );
-        setCountries(res.data);
+        const newCountries: Country[] = res.data;
+        newCountries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+
+        setCountries(newCountries);
+        setFilteredCountries(newCountries);
       } catch (err) {
         if (err instanceof Error) console.log(err.message);
       }
@@ -33,7 +54,7 @@ function App() {
     fetchCountries();
   }, []);
 
-  const countryBoxes = countries.map((e, i) => (
+  const countryBoxes = filteredCountries.map((e, i) => (
     <CountryBox countryInfo={e} key={i} />
   ));
 
@@ -62,7 +83,7 @@ function App() {
               />
               <input type="text" placeholder="Search for a country..."></input>
             </div>
-            <FilterDropdown options={regions} />
+            <FilterDropdown options={regions} onSelect={onRegionSelected} />
           </div>
           <div className={classes.countriesList}>{countryBoxes}</div>
         </div>
