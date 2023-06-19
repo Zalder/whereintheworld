@@ -5,12 +5,18 @@ import { Country } from "./models/Country";
 import { CountryBox } from "./components/CountryBox";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { FilterDropdown } from "./components/FilterDropdown";
+import { DropdownOption, FilterDropdown } from "./components/FilterDropdown";
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
 
-  const regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
+  const regions: DropdownOption[] = [
+    { id: "africa", label: "Africa" },
+    { id: "america", label: "America" },
+    { id: "asia", label: "Asia" },
+    { id: "europe", label: "Europe" },
+    { id: "oceania", label: "Oceania" },
+  ];
 
   useEffect(() => {
     const fetchCountries = async () => {
