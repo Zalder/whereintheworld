@@ -46,8 +46,6 @@ $pagePadding: 5rem;
         gap: 1rem;
 
         input {
-          font-family: "Nunito Sans", sans-serif;
-          color: hsl(0, 0%, 100%);
           font-weight: 600;
           height: 100%;
           border: none;
@@ -62,23 +60,6 @@ $pagePadding: 5rem;
           }
         }
       }
-
-      select {
-        width: 12.5rem;
-        height: 3.5rem;
-        background-color: hsl(209, 23%, 22%);
-        border-radius: 6px;
-        border: none;
-        padding: 0 1rem;
-        appearance: none;
-
-        font-family: "Nunito Sans", sans-serif;
-        color: hsl(0, 0%, 100%);
-
-        &:focus {
-          outline: none;
-        }
-      }
     }
   }
 
@@ -86,20 +67,16 @@ $pagePadding: 5rem;
     display: grid;
     grid-gap: 4.5rem;
     margin-top: 3rem;
-    grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }
 
 h1 {
-  font-family: "Nunito Sans", sans-serif;
   font-size: 22px;
-  color: hsl(0, 0%, 100%);
   appearance: none;
 }
 
 a {
-  font-family: "Nunito Sans", sans-serif;
   text-decoration: none;
-  color: hsl(0, 0%, 100%);
   font-weight: 600;
 }

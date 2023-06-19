@@ -5,9 +5,12 @@ import { Country } from "./models/Country";
 import { CountryBox } from "./components/CountryBox";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { FilterDropdown } from "./components/FilterDropdown";
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
+
+  const regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -53,13 +56,7 @@ function App() {
               />
               <input type="text" placeholder="Search for a country..."></input>
             </div>
-            <select name="regions" id="regions">
-              <option value="africa">Africa</option>
-              <option value="america">America</option>
-              <option value="asia">Asia</option>
-              <option value="europe">Europe</option>
-              <option value="oceania">Oceania</option>
-            </select>
+            <FilterDropdown options={regions} />
           </div>
           <div className={classes.countriesList}>{countryBoxes}</div>
         </div>
