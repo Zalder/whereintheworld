@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Country } from "./models/Country";
 import { CountryBox } from "./components/CountryBox";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { DropdownOption, FilterDropdown } from "./components/FilterDropdown";
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);
-  const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   const regions: DropdownOption[] = [
     { id: "Africa", label: "Africa" },
@@ -20,20 +21,30 @@ function App() {
   ];
 
   const onRegionSelected = (option: DropdownOption) => {
-    const newCountries = countries
-      .filter((elem) => elem.region == option.id)
-      .sort((a, b) => a.name.common.localeCompare(b.name.common));
-    setFilteredCountries(newCountries);
+    setSelectedRegion(option.id);
   };
 
-  const filterCountries = (region?: string) => {
-    if (region) {
-      const newCountries = countries.filter((elem) => elem.region == region);
-      setFilteredCountries(newCountries);
-    } else {
-      setFilteredCountries(countries);
-    }
+  const onSearchChange = (text: string) => {
+    setSearchText(text);
   };
+
+  const filteredCountries = useMemo(() => {
+    let newCountries: Country[] = countries;
+    if (selectedRegion) {
+      newCountries = newCountries.filter(
+        (elem) => elem.region == selectedRegion
+      );
+    }
+
+    if (searchText) {
+      newCountries = newCountries.filter((elem) =>
+        elem.name.common.toLowerCase().startsWith(searchText)
+      );
+    }
+
+    newCountries.sort((a, b) => a.name.common.localeCompare(b.name.common));
+    return newCountries;
+  }, [countries, selectedRegion, searchText]);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -41,11 +52,8 @@ function App() {
         const res = await axios.get(
           "https://restcountries.com/v3.1/all?fields=name,capital,population,flags,region"
         );
-        const newCountries: Country[] = res.data;
-        newCountries.sort((a, b) => a.name.common.localeCompare(b.name.common));
 
-        setCountries(newCountries);
-        setFilteredCountries(newCountries);
+        setCountries(res.data);
       } catch (err) {
         if (err instanceof Error) console.log(err.message);
       }
@@ -81,7 +89,11 @@ function App() {
                 icon={faMagnifyingGlass}
                 style={{ color: "#ffffff" }}
               />
-              <input type="text" placeholder="Search for a country..."></input>
+              <input
+                type="text"
+                placeholder="Search for a country..."
+                onInput={(e) => onSearchChange(e.currentTarget.value)}
+              ></input>
             </div>
             <FilterDropdown options={regions} onSelect={onRegionSelected} />
           </div>
