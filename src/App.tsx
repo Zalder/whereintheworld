@@ -1,11 +1,11 @@
-import classes from "./App.module.scss";
+import { faMagnifyingGlass, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { Country } from "./models/Country";
-import { CountryBox } from "./components/CountryBox";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { useEffect, useMemo, useState } from "react";
+import classes from "./App.module.scss";
+import { CountryBox } from "./components/CountryBox";
 import { DropdownOption, FilterDropdown } from "./components/FilterDropdown";
+import { Country } from "./models/Country";
 
 function App() {
   const [countries, setCountries] = useState<Country[]>([]);

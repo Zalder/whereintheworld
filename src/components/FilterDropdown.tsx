@@ -1,8 +1,8 @@
-import classes from "./FilterDropdown.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { DropdownItem } from "./DropdownItem";
+import classes from "./FilterDropdown.module.scss";
 
 export interface DropdownOption {
   id: string;
