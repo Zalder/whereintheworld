@@ -1,13 +1,68 @@
-import { faMagnifyingGlass, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
-import classes from "./App.module.scss";
+import { styled } from "styled-components";
 import { CountryBox } from "./components/CountryBox";
 import { DropdownOption, FilterDropdown } from "./components/FilterDropdown";
+import { SearchField } from "./components/SearchField";
 import { Country } from "./models/Country";
 
-function App() {
+const pagePadding = "5rem";
+const totalWidth = "1440px";
+
+const PageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const HeaderSection = styled.div`
+  background-color: hsl(209, 23%, 22%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 ${pagePadding};
+  max-width: ${totalWidth};
+  margin: 0 auto;
+`;
+
+const DarkModeIcon = styled.span`
+  margin-right: 0.5rem;
+`;
+
+const MainSection = styled.div`
+  padding: 2.5rem ${pagePadding};
+  max-width: ${totalWidth};
+  margin: 0 auto;
+`;
+
+const FilterBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const CountriesList = styled.div`
+  display: grid;
+  grid-gap: 4.5rem;
+  justify-content: space-between;
+  margin-top: 3rem;
+  grid-template-columns: repeat(auto-fit, 16rem);
+`;
+
+const Link = styled.a`
+  text-decoration: none;
+  font-weight: 600;
+`;
+
+const MainTitle = styled.h1`
+  font-size: 22px;
+  appearance: none;
+`;
+
+export const App = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -68,40 +123,26 @@ function App() {
 
   return (
     <>
-      <div className={classes.container}>
-        <div className={classes.header}>
-          <div className={classes.topBar}>
-            <h1>Where in the world?</h1>
-            <a href="#">
-              <FontAwesomeIcon
-                icon={faMoon}
-                style={{ color: "#ffffff" }}
-                className={classes.darkModeIcon}
-              />
-              Dark Mode
-            </a>
-          </div>
-        </div>
-        <div className={classes.mainSection}>
-          <div className={classes.searchBar}>
-            <div className={classes.searchWrapper}>
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                style={{ color: "#ffffff" }}
-              />
-              <input
-                type="text"
-                placeholder="Search for a country..."
-                onInput={(e) => onSearchChange(e.currentTarget.value)}
-              ></input>
-            </div>
+      <PageContainer>
+        <HeaderSection>
+          <MainTitle>Where in the world?</MainTitle>
+          <Link href="#">
+            <DarkModeIcon>
+              <FontAwesomeIcon icon={faMoon} style={{ color: "#ffffff" }} />
+            </DarkModeIcon>
+            Dark Mode
+          </Link>
+        </HeaderSection>
+        <MainSection>
+          <FilterBar>
             <FilterDropdown options={regions} onSelect={onRegionSelected} />
-          </div>
-          <div className={classes.countriesList}>{countryBoxes}</div>
-        </div>
-      </div>
+            <SearchField onSearchChange={onSearchChange} />
+          </FilterBar>
+          <CountriesList>{countryBoxes}</CountriesList>
+        </MainSection>
+      </PageContainer>
     </>
   );
-}
+};
 
 export default App;

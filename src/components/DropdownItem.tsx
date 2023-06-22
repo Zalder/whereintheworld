@@ -1,4 +1,4 @@
-import classes from "./DropdownItem.module.scss";
+import { styled } from "styled-components";
 import { DropdownOption } from "./FilterDropdown";
 
 type Props = {
@@ -7,13 +7,16 @@ type Props = {
   onClick: (option: DropdownOption) => void;
 };
 
+const DropdownItemBox = styled.div`
+  padding: 0.25rem 0;
+  cursor: pointer;
+  user-select: none;
+`;
+
 export const DropdownItem = (props: Props) => {
   return (
-    <div
-      className={classes.dropdownItem}
-      onClick={() => props.onClick(props.option)}
-    >
+    <DropdownItemBox onClick={() => props.onClick(props.option)}>
       {props.option.label}
-    </div>
+    </DropdownItemBox>
   );
 };

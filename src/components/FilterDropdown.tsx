@@ -1,8 +1,47 @@
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { styled } from "styled-components";
 import { DropdownItem } from "./DropdownItem";
-import classes from "./FilterDropdown.module.scss";
+
+const DropdownContainer = styled.div`
+  position: relative;
+  width: 12.5rem;
+`;
+
+const DropdownButton = styled.div`
+  border: none;
+  height: 3.5rem;
+  padding: 0 1.5rem;
+  appearance: none;
+
+  border-radius: 6px;
+
+  background-color: hsl(209, 23%, 22%);
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const DropdownMenu = styled.div`
+  position: absolute;
+  left: 0px;
+  width: 12.5rem;
+  background-color: hsl(209, 23%, 22%);
+  border-radius: 6px;
+  margin: 0.25rem 0;
+  padding: 1rem 1.5rem;
+
+  font-size: 14px;
+
+  display: flex;
+  flex-direction: column;
+`;
 
 export interface DropdownOption {
   id: string;
@@ -36,17 +75,12 @@ export const FilterDropdown = (props: Props) => {
   ));
 
   return (
-    <div className={classes.dropdown}>
-      <div
-        className={classes.dropdownButton}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <div className={classes.label}>
-          {selectedItem?.label ?? "Filter by Region"}
-        </div>
+    <DropdownContainer>
+      <DropdownButton onClick={() => setIsOpen(!isOpen)}>
+        {selectedItem?.label ?? "Filter by Region"}
         <FontAwesomeIcon icon={faChevronDown} style={{ color: "#ffffff" }} />
-      </div>
-      {isOpen && <div className={classes.dropdownMenu}>{options}</div>}
-    </div>
+      </DropdownButton>
+      {isOpen && <DropdownMenu>{options}</DropdownMenu>}
+    </DropdownContainer>
   );
 };

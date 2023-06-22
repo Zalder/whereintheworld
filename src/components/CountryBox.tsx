@@ -1,5 +1,39 @@
+import { styled } from "styled-components";
 import { Country } from "../models/Country";
-import classes from "./CountryBox.module.scss";
+
+const CountryBoxContainer = styled.div`
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+`;
+
+const CountryFlag = styled.img`
+  height: 10rem;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+`;
+
+const CountryInfo = styled.div`
+  font-weight: 400;
+  padding: 1.25rem;
+  padding-bottom: 2.5rem;
+  background-color: hsl(209, 23%, 22%);
+  width: 100%;
+`;
+
+const CountryName = styled.h2`
+  margin: 0;
+  font-size: 18px;
+  margin-bottom: 1rem;
+`;
+
+const CountryInfoList = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+`;
 
 type Props = {
   countryInfo: Country;
@@ -7,14 +41,14 @@ type Props = {
 
 export const CountryBox = (props: Props) => {
   return (
-    <div className={classes.countryBox}>
-      <img
+    <CountryBoxContainer>
+      <CountryFlag
         src={props.countryInfo.flags.png}
         alt={props.countryInfo.flags.alt}
       />
-      <div className={classes.countryInfo}>
-        <h2>{props.countryInfo.name.common}</h2>
-        <ul>
+      <CountryInfo>
+        <CountryName>{props.countryInfo.name.common}</CountryName>
+        <CountryInfoList>
           <li>
             <b>Population</b>:{" "}
             {props.countryInfo.population.toLocaleString("en-us")}
@@ -25,8 +59,8 @@ export const CountryBox = (props: Props) => {
           <li>
             <b>Capital</b>: {props.countryInfo.capital}
           </li>
-        </ul>
-      </div>
-    </div>
+        </CountryInfoList>
+      </CountryInfo>
+    </CountryBoxContainer>
   );
 };
