@@ -16,6 +16,7 @@ const SearchWrapper = styled.div`
   align-items: center;
   padding: 0 2rem;
   gap: 1rem;
+  box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
 `;
 
 const SearchInput = styled.input`

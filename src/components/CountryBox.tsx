@@ -5,6 +5,7 @@ const CountryBoxContainer = styled.div`
   width: 100%;
   border-radius: 4px;
   overflow: hidden;
+  box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
 `;
 
 const CountryFlag = styled.img`

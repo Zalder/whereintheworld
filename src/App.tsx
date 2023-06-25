@@ -69,6 +69,7 @@ const darkTheme = {
   elemBg: "hsl(209, 23%, 22%)",
   textColor: "hsl(0, 0%, 100%)",
   inputColor: "hsl(0, 0%, 100%)",
+  boxShadowColor: "rgba(19, 25, 31, 0.15)",
 };
 
 const lightTheme = {
@@ -76,6 +77,7 @@ const lightTheme = {
   elemBg: "hsl(0, 0%, 100%)",
   textColor: "hsl(200, 15%, 8%)",
   inputColor: "hsl(0, 0%, 52%)",
+  boxShadowColor: "rgba(200, 207, 212, 0.57)",
 };
 
 export const App = () => {

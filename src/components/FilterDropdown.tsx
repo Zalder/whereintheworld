@@ -26,6 +26,7 @@ const DropdownButton = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
 `;
 
 const DropdownMenu = styled.div`
@@ -41,6 +42,7 @@ const DropdownMenu = styled.div`
 
   display: flex;
   flex-direction: column;
+  box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
 `;
 
 export interface DropdownOption {
