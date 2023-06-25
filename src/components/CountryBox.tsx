@@ -18,7 +18,7 @@ const CountryInfo = styled.div`
   font-weight: 400;
   padding: 1.25rem;
   padding-bottom: 2.5rem;
-  background-color: hsl(209, 23%, 22%);
+  background-color: ${(props) => props.theme.elemBg};
   width: 100%;
 `;
 
@@ -33,6 +33,10 @@ const CountryInfoList = styled.ul`
   margin: 0;
   padding: 0;
   font-size: 14px;
+
+  b {
+    font-weight: 600;
+  }
 `;
 
 type Props = {

@@ -2,10 +2,11 @@ import { faMoon } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
-import { styled } from "styled-components";
+import { ThemeProvider, styled } from "styled-components";
 import { CountryBox } from "./components/CountryBox";
 import { DropdownOption, FilterDropdown } from "./components/FilterDropdown";
 import { SearchField } from "./components/SearchField";
+import GlobalStyles from "./globalStyles.css";
 import { Country } from "./models/Country";
 
 const pagePadding = "5rem";
@@ -17,14 +18,14 @@ const PageContainer = styled.div`
 `;
 
 const HeaderSection = styled.div`
-  background-color: hsl(209, 23%, 22%);
+  background-color: ${(props) => props.theme.elemBg};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 ${pagePadding};
   max-width: ${totalWidth};
   margin: 0 auto;
+  padding: 0.5rem ${pagePadding};
 `;
 
 const DarkModeIcon = styled.span`
@@ -59,13 +60,29 @@ const Link = styled.a`
 
 const MainTitle = styled.h1`
   font-size: 22px;
+  font-weight: 600;
   appearance: none;
 `;
+
+const darkTheme = {
+  background: "hsl(207, 26%, 17%)",
+  elemBg: "hsl(209, 23%, 22%)",
+  textColor: "hsl(0, 0%, 100%)",
+  inputColor: "hsl(0, 0%, 100%)",
+};
+
+const lightTheme = {
+  background: "hsl(0, 0%, 98%)",
+  elemBg: "hsl(0, 0%, 100%)",
+  textColor: "hsl(200, 15%, 8%)",
+  inputColor: "hsl(0, 0%, 52%)",
+};
 
 export const App = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [searchText, setSearchText] = useState("");
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   const regions: DropdownOption[] = [
     { id: "Africa", label: "Africa" },
@@ -123,24 +140,27 @@ export const App = () => {
 
   return (
     <>
-      <PageContainer>
-        <HeaderSection>
-          <MainTitle>Where in the world?</MainTitle>
-          <Link href="#">
-            <DarkModeIcon>
-              <FontAwesomeIcon icon={faMoon} style={{ color: "#ffffff" }} />
-            </DarkModeIcon>
-            Dark Mode
-          </Link>
-        </HeaderSection>
-        <MainSection>
-          <FilterBar>
-            <FilterDropdown options={regions} onSelect={onRegionSelected} />
-            <SearchField onSearchChange={onSearchChange} />
-          </FilterBar>
-          <CountriesList>{countryBoxes}</CountriesList>
-        </MainSection>
-      </PageContainer>
+      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+        <GlobalStyles />
+        <PageContainer>
+          <HeaderSection>
+            <MainTitle>Where in the world?</MainTitle>
+            <Link href="#" onClick={() => setIsDarkTheme(!isDarkTheme)}>
+              <DarkModeIcon>
+                <FontAwesomeIcon icon={faMoon} style={{ color: "#ffffff" }} />
+              </DarkModeIcon>
+              Dark Mode
+            </Link>
+          </HeaderSection>
+          <MainSection>
+            <FilterBar>
+              <SearchField onSearchChange={onSearchChange} />
+              <FilterDropdown options={regions} onSelect={onRegionSelected} />
+            </FilterBar>
+            <CountriesList>{countryBoxes}</CountriesList>
+          </MainSection>
+        </PageContainer>
+      </ThemeProvider>
     </>
   );
 };

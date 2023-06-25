@@ -17,7 +17,7 @@ const DropdownButton = styled.div`
 
   border-radius: 6px;
 
-  background-color: hsl(209, 23%, 22%);
+  background-color: ${(props) => props.theme.elemBg};
   font-size: 14px;
   cursor: pointer;
   user-select: none;
@@ -32,7 +32,7 @@ const DropdownMenu = styled.div`
   position: absolute;
   left: 0px;
   width: 12.5rem;
-  background-color: hsl(209, 23%, 22%);
+  background-color: ${(props) => props.theme.elemBg};
   border-radius: 6px;
   margin: 0.25rem 0;
   padding: 1rem 1.5rem;

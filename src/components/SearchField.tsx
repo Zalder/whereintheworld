@@ -9,7 +9,7 @@ type Props = {
 const SearchWrapper = styled.div`
   width: 30rem;
   height: 3.5rem;
-  background-color: hsl(209, 23%, 22%);
+  background-color: ${(props) => props.theme.elemBg};
   border-radius: 6px;
   display: flex;
   flex-direction: row;
@@ -29,7 +29,7 @@ const SearchInput = styled.input`
     outline: none;
   }
   &::placeholder {
-    color: hsl(0, 0%, 100%);
+    color: ${(props) => props.theme.inputColor};
   }
 `;
 export const SearchField = (props: Props) => {
