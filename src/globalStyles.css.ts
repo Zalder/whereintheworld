@@ -21,4 +21,13 @@ body {
     box-sizing: inherit;
     font-family: "Nunito Sans", sans-serif;
     color: ${(props) => props.theme.textColor};
-}`
+}
+
+ul
+{
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+`

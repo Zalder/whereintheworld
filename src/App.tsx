@@ -9,11 +9,18 @@ import {
 } from "react-router-dom";
 import { ThemeProvider, styled } from "styled-components";
 import GlobalStyles from "./globalStyles.css";
+import { CountryDetails } from "./routes/CountryDetails";
 import { MainPage } from "./routes/MainPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/whereintheworld/" element={<MainPage />}></Route>
+    <>
+      <Route path="/whereintheworld/" element={<MainPage />}></Route>
+      <Route
+        path="/whereintheworld/country/"
+        element={<CountryDetails />}
+      ></Route>
+    </>
   )
 );
 
