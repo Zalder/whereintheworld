@@ -34,11 +34,14 @@ const BackButton = styled(Link)`
   box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
 `;
 
-const CountryInfoSection = styled.div``;
+const CountryInfoSection = styled.div`
+  flex-grow: 1;
+`;
 
 const CountryFlag = styled.img`
   width: 35rem;
   height: 25rem;
+  object-fit: cover;
 `;
 
 const BorderCountriesList = styled.ul`
