@@ -4,7 +4,7 @@ import { Country } from "./models/Country";
 export const getAllCountries = async (): Promise<Country[]> => {
     try {
         const res = await axios.get(
-          "https://restcountries.com/v3.1/all?fields=name,capital,population,flags,region,subregion,currencies,borders,alpha3code,languages,tld"
+          "https://restcountries.com/v3.1/all?fields=name,capital,population,flags,region,subregion,currencies,borders,cca3,languages,tld"
         );
         
         return res.data

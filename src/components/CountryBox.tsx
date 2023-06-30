@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { Country } from "../models/Country";
 
-const CountryBoxContainer = styled.div`
+const CountryBoxContainer = styled(Link)`
+  display: block;
   width: 100%;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
+  text-decoration: none;
 `;
 
 const CountryFlag = styled.img`
@@ -46,7 +49,7 @@ type Props = {
 
 export const CountryBox = (props: Props) => {
   return (
-    <CountryBoxContainer>
+    <CountryBoxContainer to={`/country/${props.countryInfo.cca3}`}>
       <CountryFlag
         src={props.countryInfo.flags.png}
         alt={props.countryInfo.flags.alt}
