@@ -154,10 +154,12 @@ export const CountryDetailsPage = () => {
               {languages}
             </li>
           </CountryFactsList>
-          <BorderCountriesList>
-            <CountryInfoSubheader>Border Countries:</CountryInfoSubheader>
-            {borderCountriesItems}
-          </BorderCountriesList>
+          {borderCountries.length > 0 && (
+            <BorderCountriesList>
+              <CountryInfoSubheader>Border Countries:</CountryInfoSubheader>
+              {borderCountriesItems}
+            </BorderCountriesList>
+          )}
         </CountryInfoSection>
       </MainContent>
     </PageContainer>

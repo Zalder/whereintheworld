@@ -19,9 +19,11 @@ const countriesStore = new CountriesStore();
 const loadCountryDetails = async (id: string) => {
   const countryDetails = await countriesStore.getCountryById(id);
 
-  const borderCountries = await Promise.all(
-    countryDetails.borders.map((e) => countriesStore.getCountryById(e))
-  );
+  const borderCountries = countryDetails.borders
+    ? await Promise.all(
+        countryDetails.borders.map((e) => countriesStore.getCountryById(e))
+      )
+    : [];
 
   return { countryDetails, borderCountries };
 };
