@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import { styled } from "styled-components";
 import { CountryBox } from "../components/CountryBox";
 import { DropdownOption, FilterDropdown } from "../components/FilterDropdown";
@@ -31,9 +31,10 @@ const CountriesList = styled.div`
 `;
 
 export const MainPage = () => {
-  const [countries, setCountries] = useState<Country[]>([]);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [searchText, setSearchText] = useState("");
+
+  const countries = useLoaderData() as Country[];
 
   const regions: DropdownOption[] = [
     { id: "Africa", label: "Africa" },
@@ -68,22 +69,6 @@ export const MainPage = () => {
     newCountries.sort((a, b) => a.name.common.localeCompare(b.name.common));
     return newCountries;
   }, [countries, selectedRegion, searchText]);
-
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const res = await axios.get(
-          "https://restcountries.com/v3.1/all?fields=name,capital,population,flags,region"
-        );
-
-        setCountries(res.data);
-      } catch (err) {
-        if (err instanceof Error) console.log(err.message);
-      }
-    };
-
-    fetchCountries();
-  }, []);
 
   const countryBoxes = filteredCountries.map((e, i) => (
     <CountryBox countryInfo={e} key={i} />

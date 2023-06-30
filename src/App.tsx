@@ -8,17 +8,36 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import { ThemeProvider, styled } from "styled-components";
+import { CountriesStore } from "./CountriesStore";
+import { getAllCountries } from "./countriesApi";
 import GlobalStyles from "./globalStyles.css";
-import { CountryDetails } from "./routes/CountryDetails";
+import { CountryDetailsPage } from "./routes/CountryDetailsPage";
 import { MainPage } from "./routes/MainPage";
+
+const countriesStore = new CountriesStore();
+
+const loadCountryDetails = async (id: string) => {
+  const countryDetails = await countriesStore.getCountryById(id);
+
+  const borderCountries = await Promise.all(
+    countryDetails.borders.map((e) => countriesStore.getCountryById(e))
+  );
+
+  return { countryDetails, borderCountries };
+};
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/whereintheworld/" element={<MainPage />}></Route>
       <Route
-        path="/whereintheworld/country/"
-        element={<CountryDetails />}
+        path="/whereintheworld/"
+        element={<MainPage />}
+        loader={getAllCountries}
+      ></Route>
+      <Route
+        path="/whereintheworld/country/:country"
+        element={<CountryDetailsPage />}
+        loader={({ params }) => loadCountryDetails(params.country ?? "")}
       ></Route>
     </>
   )

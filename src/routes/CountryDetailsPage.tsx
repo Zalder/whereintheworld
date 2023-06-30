@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { styled } from "styled-components";
+import { Country } from "../models/Country";
 
 const PageContainer = styled.div`
   padding: 3rem 5rem;
@@ -47,9 +48,10 @@ const BorderCountriesList = styled.ul`
   align-items: center;
   font-size: 14px;
   margin-top: 5rem;
+  flex-wrap: wrap;
 `;
 
-const BorderCountryLink = styled.a`
+const BorderCountryLink = styled(Link)`
   display: block;
   background-color: ${(props) => props.theme.elemBg};
   width: 6rem;
@@ -58,6 +60,7 @@ const BorderCountryLink = styled.a`
   border-radius: 6px;
   cursor: pointer;
   box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
+  text-decoration: none;
 `;
 
 const CountryInfoSubheader = styled.h3`
@@ -81,56 +84,77 @@ const CountryName = styled.h2`
   font-size: 28px;
 `;
 
-export const CountryDetails = () => {
+type LoaderData = {
+  countryDetails: Country;
+  borderCountries: Country[];
+};
+
+export const CountryDetailsPage = () => {
+  const { countryDetails, borderCountries } = useLoaderData() as LoaderData;
+  console.log(borderCountries);
+
+  const languages = Object.values(countryDetails.languages).join(", ");
+  const currencies = Object.values(countryDetails.currencies)
+    .map((e) => e.name)
+    .join(", ");
+  const nativeNames = Object.values(countryDetails.name.nativeName)
+    .map((e) => e.common)
+    .join("/");
+
+  const borderCountriesItems = borderCountries.map((e, idx) => (
+    <li key={idx}>
+      <BorderCountryLink to={`/whereintheworld/country/${e.cca3}`}>
+        {e.name.common}
+      </BorderCountryLink>
+    </li>
+  ));
+
   return (
     <PageContainer>
       <BackButton to=".." relative="path">
         Back
       </BackButton>
       <MainContent>
-        <CountryFlag src="https://flagcdn.com/be.svg"></CountryFlag>
+        <CountryFlag src={countryDetails.flags.svg}></CountryFlag>
         <CountryInfoSection>
-          <CountryName>Belgium</CountryName>
+          <CountryName>{countryDetails.name.common}</CountryName>
           <CountryFactsList>
             <li>
-              <CountryInfoSubheader>Native Name: </CountryInfoSubheader>Belgie
+              <CountryInfoSubheader>Native Name: </CountryInfoSubheader>
+              {nativeNames}
             </li>
             <li>
               <CountryInfoSubheader>Population: </CountryInfoSubheader>
-              11.319.511
+              {countryDetails.population.toLocaleString("en-us")}
             </li>
             <li>
-              <CountryInfoSubheader>Region: </CountryInfoSubheader>Europe
+              <CountryInfoSubheader>Region: </CountryInfoSubheader>
+              {countryDetails.region}
             </li>
             <li>
-              <CountryInfoSubheader>Sub Region: </CountryInfoSubheader>Western
-              Europe
+              <CountryInfoSubheader>Sub Region: </CountryInfoSubheader>
+              {countryDetails.subregion}
             </li>
             <li>
-              <CountryInfoSubheader>Capital: </CountryInfoSubheader>Brussels
+              <CountryInfoSubheader>Capital: </CountryInfoSubheader>
+              {countryDetails.capital}
             </li>
             <li>
-              <CountryInfoSubheader>Top Level Domain: </CountryInfoSubheader>.be
+              <CountryInfoSubheader>Top Level Domain: </CountryInfoSubheader>
+              {countryDetails.tld[0]}
             </li>
             <li>
-              <CountryInfoSubheader>Currencies: </CountryInfoSubheader>Euro
+              <CountryInfoSubheader>Currencies: </CountryInfoSubheader>
+              {currencies}
             </li>
             <li>
-              <CountryInfoSubheader>Languages: </CountryInfoSubheader>Dutch,
-              French, German
+              <CountryInfoSubheader>Languages: </CountryInfoSubheader>
+              {languages}
             </li>
           </CountryFactsList>
           <BorderCountriesList>
             <CountryInfoSubheader>Border Countries:</CountryInfoSubheader>
-            <li>
-              <BorderCountryLink>France</BorderCountryLink>
-            </li>
-            <li>
-              <BorderCountryLink>Germany</BorderCountryLink>
-            </li>
-            <li>
-              <BorderCountryLink>Netherlands</BorderCountryLink>
-            </li>
+            {borderCountriesItems}
           </BorderCountriesList>
         </CountryInfoSection>
       </MainContent>
