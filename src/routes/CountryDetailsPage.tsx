@@ -91,7 +91,6 @@ type LoaderData = {
 
 export const CountryDetailsPage = () => {
   const { countryDetails, borderCountries } = useLoaderData() as LoaderData;
-  console.log(borderCountries);
 
   const languages = Object.values(countryDetails.languages).join(", ");
   const currencies = Object.values(countryDetails.currencies)
