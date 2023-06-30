@@ -102,7 +102,7 @@ export const CountryDetailsPage = () => {
 
   const borderCountriesItems = borderCountries.map((e, idx) => (
     <li key={idx}>
-      <BorderCountryLink to={`/whereintheworld/country/${e.cca3}`}>
+      <BorderCountryLink to={`/country/${e.cca3}`}>
         {e.name.common}
       </BorderCountryLink>
     </li>
@@ -110,7 +110,7 @@ export const CountryDetailsPage = () => {
 
   return (
     <PageContainer>
-      <BackButton to=".." relative="path">
+      <BackButton to="/" relative="path">
         Back
       </BackButton>
       <MainContent>

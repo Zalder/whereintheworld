@@ -29,18 +29,17 @@ const loadCountryDetails = async (id: string) => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route path="/" element={<MainPage />} loader={getAllCountries}></Route>
       <Route
-        path="/whereintheworld/"
-        element={<MainPage />}
-        loader={getAllCountries}
-      ></Route>
-      <Route
-        path="/whereintheworld/country/:country"
+        path="country/:country"
         element={<CountryDetailsPage />}
         loader={({ params }) => loadCountryDetails(params.country ?? "")}
       ></Route>
     </>
-  )
+  ),
+  {
+    basename: "/whereintheworld/",
+  }
 );
 
 const darkTheme = {
