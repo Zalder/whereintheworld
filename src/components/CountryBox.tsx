@@ -48,6 +48,10 @@ type Props = {
 };
 
 export const CountryBox = (props: Props) => {
+  const capital = props.countryInfo.capital
+    ? props.countryInfo.capital.join(", ")
+    : "N/A";
+
   return (
     <CountryBoxContainer to={`/country/${props.countryInfo.cca3}`}>
       <CountryFlag
@@ -62,10 +66,10 @@ export const CountryBox = (props: Props) => {
             {props.countryInfo.population.toLocaleString("en-us")}
           </li>
           <li>
-            <b>Region</b>: {props.countryInfo.region}
+            <b>Region</b>: {props.countryInfo.region ?? "N/A"}
           </li>
           <li>
-            <b>Capital</b>: {props.countryInfo.capital}
+            <b>Capital</b>: {capital}
           </li>
         </CountryInfoList>
       </CountryInfo>

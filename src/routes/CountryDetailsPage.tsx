@@ -101,13 +101,23 @@ type LoaderData = {
 export const CountryDetailsPage = () => {
   const { countryDetails, borderCountries } = useLoaderData() as LoaderData;
 
-  const languages = Object.values(countryDetails.languages).join(", ");
-  const currencies = Object.values(countryDetails.currencies)
-    .map((e) => e.name)
-    .join(", ");
-  const nativeNames = Object.values(countryDetails.name.nativeName)
-    .map((e) => e.common)
-    .join("/");
+  const languages = countryDetails.languages
+    ? Object.values(countryDetails.languages).join(", ")
+    : "N/A";
+  const currencies = countryDetails.currencies
+    ? Object.values(countryDetails.currencies)
+        .map((e) => e.name)
+        .join(", ")
+    : "N/A";
+  const nativeNames = countryDetails.name.nativeName
+    ? Object.values(countryDetails.name.nativeName)
+        .map((e) => e.common)
+        .join("/")
+    : "N/A";
+
+  const capital = countryDetails.capital
+    ? countryDetails.capital.join(", ")
+    : "N/A";
 
   const borderCountriesItems = borderCountries.map((e, idx) => (
     <li key={idx}>
@@ -144,11 +154,11 @@ export const CountryDetailsPage = () => {
             </li>
             <li>
               <CountryInfoSubheader>Sub Region: </CountryInfoSubheader>
-              {countryDetails.subregion}
+              {countryDetails.subregion ?? "N/A"}
             </li>
             <li>
               <CountryInfoSubheader>Capital: </CountryInfoSubheader>
-              {countryDetails.capital}
+              {capital}
             </li>
             <li>
               <CountryInfoSubheader>Top Level Domain: </CountryInfoSubheader>
