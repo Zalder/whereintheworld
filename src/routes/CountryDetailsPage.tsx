@@ -1,3 +1,5 @@
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLoaderData } from "react-router-dom";
 import { styled } from "styled-components";
 import { Country } from "../models/Country";
@@ -32,6 +34,10 @@ const BackButton = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
+`;
+
+const BackIcon = styled.span`
+  margin-right: 0.5rem;
 `;
 
 const CountryInfoSection = styled.div`
@@ -114,6 +120,9 @@ export const CountryDetailsPage = () => {
   return (
     <PageContainer>
       <BackButton to="/" relative="path">
+        <BackIcon>
+          <FontAwesomeIcon icon={faArrowLeftLong} />
+        </BackIcon>
         Back
       </BackButton>
       <MainContent>

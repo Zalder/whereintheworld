@@ -110,7 +110,7 @@ export const App = () => {
               <MainTitle>Where in the world?</MainTitle>
               <Link href="#" onClick={() => setIsDarkTheme(!isDarkTheme)}>
                 <DarkModeIcon>
-                  <FontAwesomeIcon icon={faMoon} style={{ color: "#ffffff" }} />
+                  <FontAwesomeIcon icon={faMoon} />
                 </DarkModeIcon>
                 Dark Mode
               </Link>
