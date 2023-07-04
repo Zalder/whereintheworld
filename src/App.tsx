@@ -69,7 +69,6 @@ const PageContainer = styled.div`
 `;
 
 const HeaderSection = styled.div`
-  background-color: ${(props) => props.theme.elemBg};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -77,6 +76,11 @@ const HeaderSection = styled.div`
   max-width: ${totalWidth};
   margin: 0 auto;
   padding: 0.5rem ${pagePadding};
+`;
+
+const HeaderContainer = styled.div`
+  box-shadow: ${(props) => props.theme.boxShadowColor} 0px 4px 4px;
+  background-color: ${(props) => props.theme.elemBg};
 `;
 
 const DarkModeIcon = styled.span`
@@ -101,15 +105,17 @@ export const App = () => {
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <GlobalStyles />
         <PageContainer>
-          <HeaderSection>
-            <MainTitle>Where in the world?</MainTitle>
-            <Link href="#" onClick={() => setIsDarkTheme(!isDarkTheme)}>
-              <DarkModeIcon>
-                <FontAwesomeIcon icon={faMoon} style={{ color: "#ffffff" }} />
-              </DarkModeIcon>
-              Dark Mode
-            </Link>
-          </HeaderSection>
+          <HeaderContainer>
+            <HeaderSection>
+              <MainTitle>Where in the world?</MainTitle>
+              <Link href="#" onClick={() => setIsDarkTheme(!isDarkTheme)}>
+                <DarkModeIcon>
+                  <FontAwesomeIcon icon={faMoon} style={{ color: "#ffffff" }} />
+                </DarkModeIcon>
+                Dark Mode
+              </Link>
+            </HeaderSection>
+          </HeaderContainer>
         </PageContainer>
         <RouterProvider router={router}></RouterProvider>
       </ThemeProvider>
