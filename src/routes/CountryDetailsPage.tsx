@@ -72,14 +72,24 @@ const BorderCountryLink = styled(Link)`
   text-decoration: none;
 `;
 
-const CountryInfoSubheader = styled.h3`
+const CountryInfoSubheader = styled.dt`
   font-size: 14px;
   margin: 0;
-  display: inline-block;
   margin-right: 0.25rem;
+  font-weight: 600;
+  display: inline;
 `;
 
-const CountryFactsList = styled.ul`
+const CountryFact = styled.dd`
+  margin: 0;
+  display: inline;
+`;
+
+const CountryFactItem = styled.li`
+  list-style-type: none;
+`;
+
+const CountryFactsList = styled.dl`
   display: flex;
   flex-direction: column;
   height: 10rem;
@@ -140,38 +150,46 @@ export const CountryDetailsPage = () => {
         <CountryInfoSection>
           <CountryName>{countryDetails.name.common}</CountryName>
           <CountryFactsList>
-            <li>
+            <CountryFactItem>
               <CountryInfoSubheader>Native Name: </CountryInfoSubheader>
-              {nativeNames}
-            </li>
-            <li>
+              <CountryFact>{nativeNames}</CountryFact>
+            </CountryFactItem>
+            <CountryFactItem>
               <CountryInfoSubheader>Population: </CountryInfoSubheader>
-              {countryDetails.population.toLocaleString("en-us")}
-            </li>
-            <li>
+              <CountryFact>
+                {countryDetails.population.toLocaleString("en-us")}
+              </CountryFact>
+            </CountryFactItem>
+
+            <CountryFactItem>
               <CountryInfoSubheader>Region: </CountryInfoSubheader>
-              {countryDetails.region}
-            </li>
-            <li>
+              <CountryFact>{countryDetails.region}</CountryFact>
+            </CountryFactItem>
+
+            <CountryFactItem>
               <CountryInfoSubheader>Sub Region: </CountryInfoSubheader>
-              {countryDetails.subregion ?? "N/A"}
-            </li>
-            <li>
+              <CountryFact>{countryDetails.subregion ?? "N/A"}</CountryFact>
+            </CountryFactItem>
+
+            <CountryFactItem>
               <CountryInfoSubheader>Capital: </CountryInfoSubheader>
-              {capital}
-            </li>
-            <li>
+              <CountryFact>{capital}</CountryFact>
+            </CountryFactItem>
+
+            <CountryFactItem>
               <CountryInfoSubheader>Top Level Domain: </CountryInfoSubheader>
-              {countryDetails.tld[0]}
-            </li>
-            <li>
+              <CountryFact>{countryDetails.tld[0]}</CountryFact>
+            </CountryFactItem>
+
+            <CountryFactItem>
               <CountryInfoSubheader>Currencies: </CountryInfoSubheader>
-              {currencies}
-            </li>
-            <li>
+              <CountryFact>{currencies}</CountryFact>
+            </CountryFactItem>
+
+            <CountryFactItem>
               <CountryInfoSubheader>Languages: </CountryInfoSubheader>
-              {languages}
-            </li>
+              <CountryFact>{languages}</CountryFact>
+            </CountryFactItem>
           </CountryFactsList>
           {borderCountries.length > 0 && (
             <BorderCountriesList>
