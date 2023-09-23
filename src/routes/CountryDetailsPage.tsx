@@ -90,11 +90,9 @@ const CountryFactItem = styled.li`
 `;
 
 const CountryFactsList = styled.dl`
-  display: flex;
-  flex-direction: column;
-  height: 10rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   font-size: 14px;
-  flex-wrap: wrap;
   align-content: space-between;
   gap: 1rem;
 `;
