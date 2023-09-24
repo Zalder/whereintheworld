@@ -1,10 +1,8 @@
-import { useMemo, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 import { styled } from "styled-components";
-import { CountryBox } from "../components/CountryBox";
+import CountriesList from "../components/CountriesList";
 import { DropdownOption, FilterDropdown } from "../components/FilterDropdown";
 import { SearchField } from "../components/SearchField";
-import { Country } from "../models/Country";
 
 const pagePadding = "5rem";
 const totalWidth = "1440px";
@@ -22,19 +20,9 @@ const FilterBar = styled.div`
   align-items: center;
 `;
 
-const CountriesList = styled.div`
-  display: grid;
-  grid-gap: 4.5rem;
-  justify-content: space-between;
-  margin-top: 3rem;
-  grid-template-columns: repeat(auto-fit, 16rem);
-`;
-
 export const MainPage = () => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [searchText, setSearchText] = useState("");
-
-  const countries = useLoaderData() as Country[];
 
   const regions: DropdownOption[] = [
     { id: "Africa", label: "Africa" },
@@ -52,34 +40,13 @@ export const MainPage = () => {
     setSearchText(text);
   };
 
-  const filteredCountries = useMemo(() => {
-    let newCountries: Country[] = countries;
-    if (selectedRegion) {
-      newCountries = newCountries.filter(
-        (elem) => elem.region == selectedRegion
-      );
-    }
-
-    if (searchText) {
-      newCountries = newCountries.filter((elem) =>
-        elem.name.common.toLowerCase().startsWith(searchText)
-      );
-    }
-
-    newCountries.sort((a, b) => a.name.common.localeCompare(b.name.common));
-    return newCountries;
-  }, [countries, selectedRegion, searchText]);
-
-  const countryBoxes = filteredCountries.map((e, i) => (
-    <CountryBox countryInfo={e} key={i} />
-  ));
   return (
     <MainSection>
       <FilterBar>
         <SearchField onSearchChange={onSearchChange} />
         <FilterDropdown options={regions} onSelect={onRegionSelected} />
       </FilterBar>
-      <CountriesList>{countryBoxes}</CountriesList>
+      <CountriesList searchText={searchText} regionFilter={selectedRegion} />
     </MainSection>
   );
 };
